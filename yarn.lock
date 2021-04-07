@@ -10395,6 +10395,11 @@ text-table@0.2.0, text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+text-to-speech-offline@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/text-to-speech-offline/-/text-to-speech-offline-1.0.1.tgz#df8cb193a9084f7e9fbf607ae5fd737d3ccf023a"
+  integrity sha512-W/iTod4zoUp6iYYDDRrLQakkEaHPS/GYtM6SHiRaQHtnxZ2ECskIJtnQL/yfg/52Yoknz0D6GnyWhP743MmyoA==
+
 throat@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
