@@ -24,3 +24,6 @@ https://responsivevoice.org/:
   ☐ holds with subsequent voices
 
 ☐ Another option is to generate this voices server side using AWS or GoogleCloud services
+
+TODO:
+  ☐ not able to proxy with express yet, need to publish somewhere to check for licensing problems
