@@ -1,5 +1,5 @@
 
-text-to-speech-offline:
+https://github.com/faktaarief/text-to-speech-off:
   ☐ Works on main browsers, mobile too
   ☐ bad support for languages in safari mobile
   ☐ specifiyng a voice could not work in  safari
@@ -22,3 +22,5 @@ https://responsivevoice.org/:
   ☐ Asks for permission if there hasnt been an interaction
   ☐ On iPad it needs a first direct interaction by the user that triggers the voice, otherwise doesn't work on timeout
   ☐ holds with subsequent voices
+
+☐ Another option is to generate this voices server side using AWS or GoogleCloud services

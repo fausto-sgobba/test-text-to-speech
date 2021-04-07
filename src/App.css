@@ -1,9 +1,15 @@
 .App {
-  text-align: center;
+  text-align: left;
+  padding: 3em;
 }
 
 .row + .row {
   margin-top: 20px;
+}
+
+.desc {
+  opacity: 0.5;
+  font-style: italic;
 }
 
 .App-logo {
