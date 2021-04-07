@@ -9,6 +9,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "talkify-tts": "^3.8.0",
     "text-to-speech-offline": "^1.0.1",
     "web-vitals": "^1.0.1"
   },

@@ -1,0 +1,18 @@
+
+text-to-speech-offline:
+  ☐ Works on main browsers, mobile too
+  ☐ bad support for languages in safari mobile
+  ☐ specifiyng a voice could not work in  safari
+  ☐ sembra funzionare offline su tutti i device
+
+https://github.com/Hagsten/Talkify:
+  ☐ seems to work with a player
+  ☐ no es6 support
+  ☐ needs API key
+
+https://responsivevoice.org/:
+  ☐ needs apikey
+  ☐ has a fee
+  ☐ works offline
+  ☐ works well in all devices
+  ☐ needs API key testing on the device, maibe there are licensing issues
