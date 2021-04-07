@@ -1,5 +1,6 @@
 import './App.css';
 import TTS from 'text-to-speech-offline';
+import { useEffect } from 'react';
 require('talkify-tts/dist/talkify.min.js');
 
 function App() {
@@ -16,6 +17,19 @@ function App() {
     window.responsiveVoice.speak(textToSpeak, 'Italian Female');
   };
 
+  const noInteraction = () => {
+    setTimeout(() => {
+      TTS('TTS', 'it-IT');
+    }, 1000);
+    setTimeout(() => {
+      window.responsiveVoice.speak(' Responsive Voice', 'Italian Female');
+    }, 4000);
+  };
+
+  useEffect(() => {
+    noInteraction();
+  }, []);
+
   return (
     <div className='App'>
       <h1>Test Text to speech</h1>
@@ -26,6 +40,9 @@ function App() {
       </div>
       <div className='row'>
         <button onClick={speakLibrary2}>Speak with responsivevoice.org</button>
+      </div>
+      <div className='row'>
+        <button onClick={noInteraction}>With timeout</button>
       </div>
     </div>
   );
