@@ -5,6 +5,7 @@ text-to-speech-offline:
   ☐ specifiyng a voice could not work in  safari
   ☐ sembra funzionare offline su tutti i device
   ☐ doesn't work without a first interaction by the user
+  ☐ On iPad it needs a first direct interaction by the user that triggers the voice, otherwise doesn't work on timeout
 
 https://github.com/Hagsten/Talkify:
   ☐ seems to work with a player
@@ -18,6 +19,7 @@ https://responsivevoice.org/:
   ☐ works well in all devices
   ☐ needs API key testing on the device, maibe there are licensing issues
   ☐ Asks for permission if there hasnt been an interaction
+  ☐ On iPad it needs a first direct interaction by the user that triggers the voice, otherwise doesn't work on timeout
 
 TODO:
   ☐ check speech without interaction
