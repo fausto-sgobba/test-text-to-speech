@@ -7,6 +7,14 @@
   margin-top: 20px;
 }
 
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+}
+
 .desc {
   opacity: 0.5;
   font-style: italic;
