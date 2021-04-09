@@ -1,5 +1,4 @@
 import './App.css';
-import TTS from 'text-to-speech-offline';
 import { useCallback, useEffect, useState } from 'react';
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
     'Tra 2 chilometri svolta a sinistra',
   );
   const [active, setActive] = useState();
-  const [activeIndex, setActiveIndex] = useState();
   const [queue, setQueue] = useState([]);
 
   const startMultipleWords = () => {
@@ -53,11 +51,46 @@ function App() {
   }, [queue, advanceQueue]);
 
   const inputOnChange = (evt) => {
-    console.log(evt);
+    console.log(evt.target.id);
+    switch (evt.target.id) {
+      case 'singleWord':
+        setSingleWord(evt.target.value);
+        break;
+      default:
+        // eslint-disable-next-line no-unused-vars
+        const [_, index] = evt.target.id.split('-');
+        setMultipleWords(
+          Object.assign([], multipleWords, {
+            [Number(index)]: evt.target.value,
+          }),
+        );
+        break;
+    }
   };
 
   const buttonClick = (evt) => {
     console.log(evt);
+    // eslint-disable-next-line no-unused-vars
+    const [action, index] = evt.target.id.split('-');
+    console.log('🚀 ~ file: App.js ~ line 75 ~ buttonClick ~ [action, index]', [
+      action,
+      index,
+    ]);
+    switch (action) {
+      case 'add':
+        const arrWithItem = [...multipleWords];
+        arrWithItem.splice(Number(index) + 1, 0, 'New Word');
+        setMultipleWords(arrWithItem);
+        break;
+      case 'remove':
+        const arrWithoutItem = [...multipleWords];
+        arrWithoutItem.splice(Number(index), 1);
+        setMultipleWords(arrWithoutItem);
+        break;
+
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
