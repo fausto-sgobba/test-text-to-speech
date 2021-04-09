@@ -1,132 +1,146 @@
 import './App.css';
 import TTS from 'text-to-speech-offline';
-import { useEffect } from 'react';
-require('talkify-tts/dist/talkify.min.js');
+import { useCallback, useEffect, useState } from 'react';
 
 function App() {
-  const textToSpeak =
-    'Prosegui per 300 metri, alla rotonda prendi la seconda uscita';
-  const speakLibraryTTS = () => {
-    console.log('speak 1');
-    // TTS(string, language, volume, rate, pitch)
-    TTS(textToSpeak, 'it-IT');
-  };
-
-  const speakLibraryResponsiveVoice = () => {
-    console.log('speak 2');
-    window.responsiveVoice.speak(textToSpeak, 'Italian Female');
-  };
-
-  const noInteraction = () => {
-    setTimeout(() => {
-      TTS('TTS', 'it-IT');
-    }, 1000);
-    setTimeout(() => {
-      window.responsiveVoice.speak(' Responsive Voice', 'Italian Female');
-    }, 4000);
-  };
-
-  const directions = [
+  const [multipleWords, setMultipleWords] = useState([
     'Prosegui 100 metri fino alla rotonda',
     'Prendi la prima uscita a destra',
     'Tieni la destra',
     'Destinazione raggiunta',
-  ];
-  const subsequentVoicesTTS = () => {
-    const speak = (text) => TTS(text, 'it-IT');
-    directions.forEach((d, i) => setTimeout(() => speak(d), 2500 * i));
+  ]);
+
+  const [singleWord, setSingleWord] = useState(
+    'Tra 2 chilometri svolta a sinistra',
+  );
+  const [active, setActive] = useState();
+  const [activeIndex, setActiveIndex] = useState();
+  const [queue, setQueue] = useState([]);
+
+  const startMultipleWords = () => {
+    setActive('multiple');
+    setQueue(multipleWords);
   };
-  const subsequentVoicesReesponsiveVoice = () => {
-    const speak = (text) =>
-      window.responsiveVoice.speak(text, 'Italian Female');
-    directions.forEach((d, i) => setTimeout(() => speak(d), 2500 * i));
+
+  const startSingleWord = () => {
+    setActive('single');
+    setQueue([singleWord]);
+  };
+
+  const advanceQueue = useCallback(() => {
+    console.log('voice ended');
+    // eslint-disable-next-line no-unused-vars
+    const [removed, ...remaining] = queue;
+    setQueue(remaining);
+  }, [queue]);
+
+  const speak = useCallback(() => {
+    const textToSpeak = queue[0];
+    const lang = 'it-IT';
+    const volume = 1;
+    const rate = 1;
+    const pitch = 1;
+    let synthesis = window.speechSynthesis;
+    let utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.addEventListener('end', advanceQueue);
+
+    utterance.lang = lang;
+    utterance.rate = rate;
+    utterance.pitch = pitch;
+    utterance.volume = volume;
+    synthesis.cancel();
+
+    return synthesis.speak(utterance);
+  }, [queue, advanceQueue]);
+
+  const inputOnChange = (evt) => {
+    console.log(evt);
+  };
+
+  const buttonClick = (evt) => {
+    console.log(evt);
   };
 
   useEffect(() => {
-    noInteraction();
-  }, []);
+    if (queue.length <= 0) {
+      setActive();
+      return;
+    }
+    speak(queue[0]);
+  }, [queue, speak]);
 
   return (
     <div className='App container'>
       <h1>Test Text to speech</h1>
-      <p className='alert alert-warning mb-4'>
-        The application tries to speak with TTS after 2s and with
-        ResponsiveVoice after 4s automatically
-      </p>
       <h2 className='mt-4'>Interaction tests</h2>
       <div className='card'>
         <div className='row card-body'>
           <div className='col-sm'>
             <div>
-              <h3>Text to speech offline</h3>
+              <label>Word to speak</label>
+              <form>
+                <div className='form-group'>
+                  <input
+                    type='email'
+                    className='form-control'
+                    id='singleWord'
+                    aria-describedby='emailHelp'
+                    placeholder='Enter the word / phrase'
+                    value={singleWord}
+                    onChange={inputOnChange}
+                  />
+                </div>
+              </form>
             </div>
             <div>
-              <button className='btn btn-primary' onClick={speakLibraryTTS}>
+              <button className='btn btn-primary' onClick={startSingleWord}>
                 Speak
               </button>
-              <p className='desc'>Simple use with click</p>
-            </div>
-            <div>
-              <button className='btn btn-primary' onClick={subsequentVoicesTTS}>
-                Subsequent voices
-              </button>
-              <p className='desc'>Different voice every 2,5s</p>
             </div>
           </div>
           <div className='col-sm'>
             <div>
-              <h3>Responsive voice</h3>
+              <form>
+                <label>Words to speak</label>
+                {multipleWords.map((w, i) => (
+                  <div
+                    key={`remove-${i}`}
+                    className='form-group inline-buttons'
+                  >
+                    <input
+                      type='email'
+                      className='form-control'
+                      id={`word-${i}`}
+                      placeholder='Enter the word / phrase'
+                      value={w}
+                      onChange={inputOnChange}
+                    />
+                    <button
+                      className='btn btn-outline-success'
+                      id={`add-${i}`}
+                      value={w}
+                      onClick={buttonClick}
+                    >
+                      +
+                    </button>
+                    <button
+                      className='btn btn-outline-danger'
+                      id={`remove-${i}`}
+                      value={w}
+                      onClick={buttonClick}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+              </form>
             </div>
             <div>
-              <button
-                className='btn btn-primary'
-                onClick={speakLibraryResponsiveVoice}
-              >
+              <button className='btn btn-primary' onClick={startMultipleWords}>
                 Speak
               </button>
-              <p className='desc'>Simple use with click</p>
-            </div>
-            <div>
-              <button
-                className='btn btn-primary'
-                onClick={subsequentVoicesReesponsiveVoice}
-              >
-                Subsequent voices
-              </button>
-              <p className='desc'>Different voice every 2,5s</p>
             </div>
           </div>
-        </div>
-      </div>
-      <h2 className='mt-4'>Timeout tests</h2>
-
-      <div className='card'>
-        <div className='row card-body'>
-          <div className='col-sm'>
-            <button className='btn btn-primary' onClick={noInteraction}>
-              Speak with timeout
-            </button>
-            <p className='desc'>
-              Voice with TTS after 2s, voice with ResponsiveVoice after 4s
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className='mt-4'>
-        <div>
-          <h2>References</h2>
-        </div>
-        <div>
-          <p className=''>
-            <a href='https://github.com/faktaarief/text-to-speech-off'>
-              https://github.com/faktaarief/text-to-speech-off
-            </a>
-            <br />
-            <a href='https://responsivevoice.org/'>
-              https://responsivevoice.org/
-            </a>
-          </p>
         </div>
       </div>
     </div>

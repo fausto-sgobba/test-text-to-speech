@@ -2,6 +2,14 @@
   text-align: left;
 }
 
+.inline-buttons {
+  display: flex;
+}
+
+.inline-buttons > * + * {
+  margin-left: 1em;
+}
+
 .desc {
   opacity: 0.5;
   font-style: italic;
