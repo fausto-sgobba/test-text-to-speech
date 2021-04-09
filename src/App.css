@@ -1,18 +1,5 @@
 .App {
   text-align: left;
-  padding: 3em;
-}
-
-.row + .row {
-  margin-top: 20px;
-}
-
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 1;
 }
 
 .desc {

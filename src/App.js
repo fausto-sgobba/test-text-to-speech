@@ -47,65 +47,86 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
+    <div className='App container'>
       <h1>Test Text to speech</h1>
-      <p className='desc'>
+      <p className='alert alert-warning mb-4'>
         The application tries to speak with TTS after 2s and with
         ResponsiveVoice after 4s automatically
       </p>
-      <h2>Interaction tests</h2>
-      <div className='row'>
-        <div className='column'>
-          <div className='row'>
-            <h3>Text to speech offline</h3>
+      <h2 className='mt-4'>Interaction tests</h2>
+      <div className='card'>
+        <div className='row card-body'>
+          <div className='col-sm'>
+            <div>
+              <h3>Text to speech offline</h3>
+            </div>
+            <div>
+              <button className='btn btn-primary' onClick={speakLibraryTTS}>
+                Speak
+              </button>
+              <p className='desc'>Simple use with click</p>
+            </div>
+            <div>
+              <button className='btn btn-primary' onClick={subsequentVoicesTTS}>
+                Subsequent voices
+              </button>
+              <p className='desc'>Different voice every 2,5s</p>
+            </div>
           </div>
-          <div>
-            <button onClick={speakLibraryTTS}>Speak</button>
-            <p className='desc'>Simple use with click</p>
-          </div>
-          <div>
-            <button onClick={subsequentVoicesTTS}>Subsequent voices</button>
-            <p className='desc'>Different voice every 2,5s</p>
+          <div className='col-sm'>
+            <div>
+              <h3>Responsive voice</h3>
+            </div>
+            <div>
+              <button
+                className='btn btn-primary'
+                onClick={speakLibraryResponsiveVoice}
+              >
+                Speak
+              </button>
+              <p className='desc'>Simple use with click</p>
+            </div>
+            <div>
+              <button
+                className='btn btn-primary'
+                onClick={subsequentVoicesReesponsiveVoice}
+              >
+                Subsequent voices
+              </button>
+              <p className='desc'>Different voice every 2,5s</p>
+            </div>
           </div>
         </div>
-        <div className='column'>
-          <div className='row'>
-            <h3>Responsive voice</h3>
-          </div>
-          <div>
-            <button onClick={speakLibraryResponsiveVoice}>Speak</button>
-            <p className='desc'>Simple use with click</p>
-          </div>
-          <div>
-            <button onClick={subsequentVoicesReesponsiveVoice}>
-              Subsequent voices
+      </div>
+      <h2 className='mt-4'>Timeout tests</h2>
+
+      <div className='card'>
+        <div className='row card-body'>
+          <div className='col-sm'>
+            <button className='btn btn-primary' onClick={noInteraction}>
+              Speak with timeout
             </button>
-            <p className='desc'>Different voice every 2,5s</p>
+            <p className='desc'>
+              Voice with TTS after 2s, voice with ResponsiveVoice after 4s
+            </p>
           </div>
         </div>
       </div>
 
-      <div className='row'>
-        <h3>Timeout test</h3>
-      </div>
-      <div>
-        <button onClick={noInteraction}>With timeout</button>
-        <p className='desc'>
-          Voice with TTS after 2s, voice with ResponsiveVoice after 4s
-        </p>
-      </div>
-
-      <div className='row'></div>
-
-      <div>
+      <div className='mt-4'>
         <div>
-          <h3>References</h3>
+          <h2>References</h2>
         </div>
         <div>
-          <p className='desc'>
-            https://github.com/faktaarief/text-to-speech-off
+          <p className=''>
+            <a href='https://github.com/faktaarief/text-to-speech-off'>
+              https://github.com/faktaarief/text-to-speech-off
+            </a>
+            <br />
+            <a href='https://responsivevoice.org/'>
+              https://responsivevoice.org/
+            </a>
           </p>
-          <p className='desc'>https://responsivevoice.org/</p>
         </div>
       </div>
     </div>
