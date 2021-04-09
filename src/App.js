@@ -28,7 +28,6 @@ function App() {
   };
 
   const advanceQueue = useCallback(() => {
-    console.log('voice ended');
     // eslint-disable-next-line no-unused-vars
     const [removed, ...remaining] = queue;
     setQueue(remaining);
@@ -82,7 +81,9 @@ function App() {
                 <div className='form-group'>
                   <input
                     type='email'
-                    className='form-control'
+                    className={`form-control ${
+                      active === 'single' ? 'is-valid' : ''
+                    }`}
                     id='singleWord'
                     aria-describedby='emailHelp'
                     placeholder='Enter the word / phrase'
@@ -102,37 +103,41 @@ function App() {
             <div>
               <form>
                 <label>Words to speak</label>
-                {multipleWords.map((w, i) => (
-                  <div
-                    key={`remove-${i}`}
-                    className='form-group inline-buttons'
-                  >
-                    <input
-                      type='email'
-                      className='form-control'
-                      id={`word-${i}`}
-                      placeholder='Enter the word / phrase'
-                      value={w}
-                      onChange={inputOnChange}
-                    />
-                    <button
-                      className='btn btn-outline-success'
-                      id={`add-${i}`}
-                      value={w}
-                      onClick={buttonClick}
+                {multipleWords.map((w, i) => {
+                  const activeClass =
+                    active === 'multiple' && queue[0] === w ? 'is-valid' : '';
+                  return (
+                    <div
+                      key={`remove-${i}`}
+                      className='form-group inline-buttons'
                     >
-                      +
-                    </button>
-                    <button
-                      className='btn btn-outline-danger'
-                      id={`remove-${i}`}
-                      value={w}
-                      onClick={buttonClick}
-                    >
-                      -
-                    </button>
-                  </div>
-                ))}
+                      <input
+                        type='email'
+                        className={`form-control ${activeClass}`}
+                        id={`word-${i}`}
+                        placeholder='Enter the word / phrase'
+                        value={w}
+                        onChange={inputOnChange}
+                      />
+                      <button
+                        className='btn btn-outline-success'
+                        id={`add-${i}`}
+                        value={w}
+                        onClick={buttonClick}
+                      >
+                        +
+                      </button>
+                      <button
+                        className='btn btn-outline-danger'
+                        id={`remove-${i}`}
+                        value={w}
+                        onClick={buttonClick}
+                      >
+                        -
+                      </button>
+                    </div>
+                  );
+                })}
               </form>
             </div>
             <div>
