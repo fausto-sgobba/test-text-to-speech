@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/test/text-to-speech/static/css/main.094f27aa.chunk.css",
-    "main.js": "/test/text-to-speech/static/js/main.3f000089.chunk.js",
-    "main.js.map": "/test/text-to-speech/static/js/main.3f000089.chunk.js.map",
-    "runtime-main.js": "/test/text-to-speech/static/js/runtime-main.f3ca8560.js",
-    "runtime-main.js.map": "/test/text-to-speech/static/js/runtime-main.f3ca8560.js.map",
-    "static/js/2.7115c712.chunk.js": "/test/text-to-speech/static/js/2.7115c712.chunk.js",
-    "static/js/2.7115c712.chunk.js.map": "/test/text-to-speech/static/js/2.7115c712.chunk.js.map",
-    "static/js/3.1a578883.chunk.js": "/test/text-to-speech/static/js/3.1a578883.chunk.js",
-    "static/js/3.1a578883.chunk.js.map": "/test/text-to-speech/static/js/3.1a578883.chunk.js.map",
-    "index.html": "/test/text-to-speech/index.html",
-    "static/css/main.094f27aa.chunk.css.map": "/test/text-to-speech/static/css/main.094f27aa.chunk.css.map",
-    "static/js/2.7115c712.chunk.js.LICENSE.txt": "/test/text-to-speech/static/js/2.7115c712.chunk.js.LICENSE.txt"
+    "main.css": "/test-text-to-speech/static/css/main.094f27aa.chunk.css",
+    "main.js": "/test-text-to-speech/static/js/main.3f000089.chunk.js",
+    "main.js.map": "/test-text-to-speech/static/js/main.3f000089.chunk.js.map",
+    "runtime-main.js": "/test-text-to-speech/static/js/runtime-main.1fa16b1c.js",
+    "runtime-main.js.map": "/test-text-to-speech/static/js/runtime-main.1fa16b1c.js.map",
+    "static/js/2.7115c712.chunk.js": "/test-text-to-speech/static/js/2.7115c712.chunk.js",
+    "static/js/2.7115c712.chunk.js.map": "/test-text-to-speech/static/js/2.7115c712.chunk.js.map",
+    "static/js/3.1a578883.chunk.js": "/test-text-to-speech/static/js/3.1a578883.chunk.js",
+    "static/js/3.1a578883.chunk.js.map": "/test-text-to-speech/static/js/3.1a578883.chunk.js.map",
+    "index.html": "/test-text-to-speech/index.html",
+    "static/css/main.094f27aa.chunk.css.map": "/test-text-to-speech/static/css/main.094f27aa.chunk.css.map",
+    "static/js/2.7115c712.chunk.js.LICENSE.txt": "/test-text-to-speech/static/js/2.7115c712.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f3ca8560.js",
+    "static/js/runtime-main.1fa16b1c.js",
     "static/js/2.7115c712.chunk.js",
     "static/css/main.094f27aa.chunk.css",
     "static/js/main.3f000089.chunk.js"
