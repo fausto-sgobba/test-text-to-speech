@@ -16,16 +16,16 @@ function App() {
   const [voices, setVoices] = useState([]);
   const [currentVoiceIndex, setCurrentVoiceIndex] = useState(0);
 
+  const iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+
   const startMultipleWords = () => {
-    // FIXME: breaks firefox, it should fire only on mobile safari
-    speak(); // try to force iPad to enable text to speech
+    if (iOS) speak(); // try to force iPad to enable text to speech
     setActive('multiple');
     setQueue(multipleWords);
   };
 
   const startSingleWord = () => {
-    // FIXME: breaks firefox, it should fire only on mobile safari
-    speak(); // try to force iPad to enable text to speech
+    if (iOS) speak(); // try to force iPad to enable text to speech
     setActive('single');
     setQueue([singleWord]);
   };
@@ -33,10 +33,16 @@ function App() {
   const advanceQueue = useCallback(() => {
     // eslint-disable-next-line no-unused-vars
     const [removed, ...remaining] = queue;
+    console.log(
+      '🚀 ~ file: App.js ~ line 36 ~ advanceQueue ~ queue',
+      queue,
+      remaining,
+    );
     setQueue(remaining);
   }, [queue]);
 
   const speak = useCallback(() => {
+    console.log('speak');
     const textToSpeak = queue[0];
     // const lang = 'it-IT';
     const volume = 1;
@@ -44,7 +50,11 @@ function App() {
     const pitch = 1;
     let synthesis = window.speechSynthesis;
     let utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.addEventListener('end', advanceQueue);
+    // FIXME: on safari sometimes this instance gets destroyed before actyally invoking the callback
+    utterance.addEventListener('end', () => {
+      console.log('end reached');
+      advanceQueue();
+    });
 
     // utterance.lang = lang;
     utterance.rate = rate;
@@ -79,13 +89,10 @@ function App() {
   };
 
   const buttonClick = (evt) => {
+    evt.preventDefault();
     console.log(evt);
     // eslint-disable-next-line no-unused-vars
     const [action, index] = evt.target.id.split('-');
-    console.log('🚀 ~ file: App.js ~ line 75 ~ buttonClick ~ [action, index]', [
-      action,
-      index,
-    ]);
     switch (action) {
       case 'add':
         const arrWithItem = [...multipleWords];
@@ -101,6 +108,7 @@ function App() {
       default:
         break;
     }
+    return false;
   };
 
   const languageOnChange = (evt) => {
@@ -162,12 +170,11 @@ function App() {
                 <form>
                   <div className='form-group'>
                     <input
-                      type='email'
+                      type='text'
                       className={`form-control ${
                         active === 'single' ? 'is-valid' : ''
                       }`}
                       id='singleWord'
-                      aria-describedby='emailHelp'
                       placeholder='Enter the word / phrase'
                       value={singleWord}
                       onChange={inputOnChange}
@@ -194,7 +201,7 @@ function App() {
                         className='form-group inline-buttons'
                       >
                         <input
-                          type='email'
+                          type='text'
                           className={`form-control ${activeClass}`}
                           id={`word-${i}`}
                           placeholder='Enter the word / phrase'
