@@ -17,12 +17,14 @@ function App() {
   const [currentVoiceIndex, setCurrentVoiceIndex] = useState(0);
 
   const startMultipleWords = () => {
+    // FIXME: breaks firefox, it should fire only on mobile safari
     speak(); // try to force iPad to enable text to speech
     setActive('multiple');
     setQueue(multipleWords);
   };
 
   const startSingleWord = () => {
+    // FIXME: breaks firefox, it should fire only on mobile safari
     speak(); // try to force iPad to enable text to speech
     setActive('single');
     setQueue([singleWord]);
